@@ -30,6 +30,17 @@ android {
             dimension "env"
         }
     }
+
+    productFlavors.all {
+        flavor ->
+            def fileName = flavor.name + ".gradle"
+            println("Update Flavor : " + flavor.name)
+            if(file(fileName).exists()) {
+                println("Load Gradle file : " + fileName)
+                apply from: fileName
+                initFlavor(flavor, project)
+            }
+    }
 }
 
 dependencies {

@@ -1,0 +1,15 @@
+def localDefineValue = '"UAT localDefineValue"'
+ext.initFlavor = {
+    it, project ->
+        it.buildConfigField "String", "env", "\"UAT\""
+        it.resValue "string", "resValue", "Res UAT"
+        it.resValue("string", "resFunction", "Res UAT")
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream()) // load local.properties
+        def localPropertiesValue = properties.getProperty('localPropertiesValue', '')
+        it.buildConfigField "String", "localPropertiesValue", localPropertiesValue
+
+        it.buildConfigField "String", "gradlePropertiesValue", "${gradlePropertiesValue}"
+        it.buildConfigField "String", "localDefineValue", localDefineValue
+}
