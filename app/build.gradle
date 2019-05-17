@@ -24,7 +24,6 @@ android {
     productFlavors {
         uat {
             dimension "env"
-            applicationIdSuffix ".uat"
         }
         production {
             dimension "env"
